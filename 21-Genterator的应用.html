@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        #wrap{
+            text-align: center;
+            width: 500px;
+            margin: 100px auto;
+            position: relative;
+        }
+        #wrap p{
+            margin-top: 10px;
+        }
+        #ul1{
+            width: 303px;
+            height: 303px;
+            margin: 20px auto;
+            padding: 0;
+            border-top: 1px solid black;
+            border-left: 1px solid black;
+        }
+        #ul1 li{
+            float: left;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+            list-style: none;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+        }
+        #tooltips{
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            position: absolute;
+            top: 0;
+            z-index: 999;
+            display: none;
+        }
+        #info{
+            width: 400px;
+            height: 200px;
+            background-color: white;
+            margin: 150px auto;
+        }
+        #info .title{
+            width: 100%;
+            height: 40px;
+            background-color: #009f95;
+            line-height: 40px;
+            color: white;
+            padding-left: 20px;
+            box-sizing: border-box;
+        }
+        #info .btn button{
+            background-color: #009F95;
+            color: white;
+            outline: none;
+            font-size: 10px;
+            width: 60px;
+            height: 30px;
+            margin-left: 170px;
+            margin-top: 35px;
+        }
+        #info .content{
+            height: 120px;
+            height: 20px;
+            box-sizing: border-box;
+            text-align: center;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <button id="btn">开始抽奖</button>
+        <p>剩余抽奖次数：<span id="num">5</span></p>
+        <ul id="ul1">
+            <li>鼠标</li>
+            <li>10元现金</li>
+            <li>再接再厉</li>
+            <li>50元购物卡</li>
+            <li>25元现金</li>
+            <li>100元优惠券</li>
+            <li>再接再厉</li>
+            <li>心相印餐巾纸</li>
+            <li>键盘</li>
+        </ul>
+    </div>
+    <div id="tooltips">
+        <div id="info">
+            <div class="title">
+                信息
+            </div>
+            <div class="content" id="content">
+                恭喜你，中奖了
+            </div>
+            <div class="btn">
+                <button id="confirm">确定</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        let oStart = document.getElementById('btn');
+        let start = genterator(5);
+        let oNum = document.getElementById('num');
+        let aLi = document.getElementsByTagName('li');
+        let timer = null;
+        let oContent = document.getElementById("content");
+        let oTooltips = document.getElementById("tooltips");
+        let oConfirm = document.getElementById("confirm");
+        oStart.onclick = () => {
+            start.next()
+        };
+
+        function draw(count) {
+            //1.抽奖过程动起来
+            let nowIndex = 0;
+            //取27,35之间的随机数，以便li转更多圈
+            let randomIndex = getRandom(27,35);
+            clearInterval(timer);
+            timer = setInterval(() => {
+                nowIndex++;
+                changeColor(nowIndex%9);
+                if (nowIndex == randomIndex) {
+                    oTooltips.style.display = 'block';
+                    clearInterval(timer);
+                    if (aLi[nowIndex%9].innerHTML == "再接再厉") {
+                        oContent.innerHTML = "很遗憾，您没有中奖"
+                    } else{
+                        oContent.innerHTML = "恭喜您获得了"+aLi[nowIndex%9].innerHTML+""
+                    }
+                }
+            },100);
+            //2.抽奖次数减少
+            oNum.innerHTML = count;
+        }
+        //取随机数
+        function getRandom(min, max) {
+            return Math.floor(Math.random()*(max-min+1)+min);
+        }
+        //让li的颜色变化
+        function changeColor(nowIndex) {
+            for (let i = 0; i < aLi.length; i++) {
+                aLi[i].style.backgroundColor = 'white';
+            }
+            aLi[nowIndex].style.backgroundColor = 'red';
+        }
+        function* genterator(count) {
+            while (count > 0) {
+                count--;
+                yield draw(count);
+            }
+        }
+        oConfirm.onclick = () => {
+            oTooltips.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

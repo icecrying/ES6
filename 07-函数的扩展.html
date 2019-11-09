@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //1.箭头函数
+    //es5中：
+    let fn = function (n) {
+        return n+1
+    };
+    console.log(fn(5));  //6
+
+    //es6中，可以用箭头函数简写
+        //1.只有一个参数和一条语句
+    let fn1 = n => n+1;
+    console.log(fn(5));  //6
+    //应用举例
+    arr = [1,2,3,4,5];
+    let num = arr.find((v) => v>3);
+    console.log(num);   //4
+
+        //2.没有参数时，前面的括号不能够被省略
+    let fn2 = () => 123;
+    console.log(fn2());      //123
+
+        //3.有多个参数时
+    let fn3 = (n,m) => n + m;
+    console.log(fn3(1,2));   //3
+
+        //4.有多条语句时
+    let fn4 = (a,b) => {
+        if (a >= b) {
+            console.log(a)
+        }else {
+            console.log(b)
+        }
+    };
+    fn4(3,4);   //4
+
+    //箭头函数的注意事项
+        //1.this的指向问题：
+            // 在一般函数里面，谁调用函数，this指向谁
+    document.onclick = function () {
+        console.log(this)       //这里的this指向document
+    };
+            //箭头函数没有自己的this，而这个this对象是定义时所在的对象
+    document.onclick = function () {
+        let f = () => {
+            console.log(this)   //这里的this指向的是document,是因为在document内运行时所产生的
+        }
+    };
+        //2.箭头函数不用用于构造函数，即不能使用new关键字，以下写法会报错
+/*    let F = () => {};
+    let f1 = new F();*/
+        //3.箭头函数不可以使用arguments对象（arguments对象是一个特殊的内置对象，参入的参数会存在这里面）
+    function f5() {
+        console.log(arguments)
+    }
+    f5(1,2,3,4);
+        //箭头函数要使用参数，可以用rest传参方式
+    let r = (...arg) => {
+        console.log(arg)
+    };
+    r(1,2,3,4,5);
+    let we = (a,b,c) => {
+        console.log(a,b,c)
+    };
+    we(1,2,3)
+</script>
+</body>
+</html>

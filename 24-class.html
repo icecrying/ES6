@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //什么是class？ class是es6引入的类的概念，可以通过class关键字定义。
+    //1.面向对象中的类：
+/*    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    Person.prototype.showName = function () {
+        alert(this.name);
+    };
+    let p = new Person("zhangsan",23);
+    p.showName();*/
+
+    //2.class:
+    let showAge = 'age1';
+    class Person{
+        constructor(name,age){
+            this.name = name;
+            this.age = age;
+        }
+        showName(){
+            console.log(this.name)
+        }
+        [showAge](){
+            console.log(this.age)
+        }
+    }
+    let p = new Person('lisi',24);
+    p.showName();
+    p[showAge]();
+
+    //3.class的注意事项：a.constructor是默认添加的方法，当new 关键字去调用类的时候，constructor会默认被执行,即使不写这个constructor方法，也会默认添加一个空方法
+    //                   b.在类中写的方法之间不能加逗号，否则会报错
+</script>
+</body>
+</html>

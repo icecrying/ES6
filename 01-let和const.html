@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //let:相当于var
+    //区别：1.不能重复定义，如
+/*    let a = 10;
+    let a = 20;*/
+
+    //2.let只作用于所在的代码块{ }内
+    var a = [];
+    for (let i = 0; i < 10; i++){
+        a[i] = function(){
+            document.write("let"+i);
+            console.log(i)      //这里没有被打出来
+        }
+    }
+    // a[6]();     //6
+    var b = [];
+    for (var i = 0; i < 10; i++){
+        console.log("var"+i);   //这里打出来是0,1,2,3,……,9
+        b[i] = function(){
+            document.write("var"+i);
+            console.log(i)      //这里打出来是10
+        }
+    }
+    b[6]();     //10
+
+    //3.const和let,let定义的是一个变量，而const定义的是一个常量，不能被改变
+    let c = 20;
+    c = 30;
+    console.log(c) ;     //30
+    const d = 20;
+    // d = 30;          这里会报错，d不能被改变：invalid assignment to const `d'
+</script>
+</body>
+</html>

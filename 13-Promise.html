@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //前置知识：同步是指代码从上到下依次执行；异步是指不按照从上到下的顺序执行代码,如下：
+/*    alert(0);
+    setTimeout(function () {
+        alert(1);
+    }, 2000);
+    alert(2);    //先弹出0再弹出2,2秒钟后弹出1*/
+
+    //1.什么是Promise?     Promise是一个构造函数，它身上有几个方法，例如：reject、resolve、catch、all、race等方法
+    //2.Promise有什么用？    将异步操作以同步的流程表达出来，避免了回调地狱(回调函数层层嵌套）
+    //3.如何创建Promise?
+    function AsyncFn(){
+        let p = new Promise((resolve,reject) => {
+            setTimeout(() => {
+                console.log('代码执行完成');
+                resolve();
+            },3000)
+        });
+        return p;
+    }
+    //关于上面的代码：
+    // 1.什么是resolve和reject？
+/*    解答：resolve和reject是一个函数块，Promise对象有三种状态：pending（进行中）、fulfilled（已成功）和rejected（已失败）
+          Promise的状态只能被resolve和reject改变，resolve可以将Promise的状态设置为fulfilled，reject可以将Promise的状态设置为rejected。*/
+    //2.为什么要将Promise封装到函数块function AsyncFn()里面？
+/*    解答：如果没有封装，promise里面的函数就会被立即执行，不能达到我们需要什么时候执行就去什么时候执行的目的*/
+    //3.代码执行完成后我还想做其他操作怎么办？例如网上买票支付成功后5秒会关闭页面。
+/*    解答：使用then()方法，如下。*/
+    AsyncFn().then(() => {
+        setTimeout(() => {
+            console.log('代码执行完成后关闭页面');
+        },5000)
+    })
+</script>
+</body>
+</html>

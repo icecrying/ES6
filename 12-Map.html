@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //什么是Map？   Map类似于对象Object，如果你需要“键值对”的数据结构，Map 比 Object 更合适。
+    let k1 = {a:1};
+    let k2 = {b:1};
+
+    let obj = {
+        [k1]: 11,
+        [k2]: 22
+    };
+    console.log(obj);  //{[object Object]: 22}
+    //js中的对象属性只能是字符串类型,上面代码中k1和k2都被转换成了[object Object],因此，k2 把 k1覆盖了
+
+    //解决方法：Map()
+    let mp = new Map([
+        [k1,33],
+        [k2,44]
+    ]);
+    console.log(mp);    //Map { {…} → 33, {…} → 44 }
+    //Map() 的size属性：
+    console.log(mp.size);   //2
+
+    //Map()相关方法
+    //1.set(key, value) 添加新的键值对
+    let mp1 = new Map([
+        ['a',111]
+    ]);
+    mp1.set('b',222);
+    console.log(mp1);    //Map { a → 111, b → 222 }
+
+    //2.get(key) 获取key对应的值
+    console.log(mp1.get('a'));      //111
+
+    //3.delete(key) 删除key
+    mp1.delete('a');
+    console.log(mp1);       //Map { b → 222 }
+
+    //4.has(key) 查看是否存在某个key
+    console.log(mp1.has('a'));      //false
+
+    //5.clear()清除所有键值对
+    mp1.clear();
+    console.log(mp1);        //Map(0)
+
+    //6.循环：keys()方法、values()方法、entries()方法
+    let mp2 = new Map([
+        ['name','zhangsan'],
+        ['age',21]
+    ]);
+    for (let i of mp2.keys()) {
+        console.log(i)      //name  age
+    }
+    for (let i of mp2.values()) {
+        console.log(i)      //zhangsan 21
+    }
+    for (let i of mp2.entries()) {
+        console.log(i)      //Array [ "name", "zhangsan" ]  Array [ "age", 21 ]
+    }
+    mp2.forEach((k,v,m) => {
+        console.log(k,v,m)      //zhangsan name  Map { name → "zhangsan", age → 21 }
+                                //21 age    Map { name → "zhangsan", age → 21 }
+    })
+</script>
+</body>
+</html>

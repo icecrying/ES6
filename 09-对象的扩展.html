@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //Object.is():判断两个值时候相等
+    console.log(NaN===NaN);     //false
+    console.log(Object.is(NaN,NaN));        //true
+
+    //合并对象：Object.assign();
+    let obj1 = {
+        a:1,
+        b:2
+    };
+    let obj2 = {c:3};
+    console.log(Object.assign(obj1,obj2))   //Object { a: 1, b: 2, c: 3 }
+</script>
+</body>
+</html>

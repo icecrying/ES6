@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //es5中的继承
+/*    function Parent(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    Parent.prototype.showName = function () {
+        console.log(this.name)
+    };
+    function Child(name, age, sex) {
+        //属性的继承
+        Parent.call(this,name,age);
+        this.sex = sex;
+    }
+    //方法的继承：
+    function extend(obj1, obj2) {
+        for (let attr in obj2) {
+            obj1[attr] = obj2[attr]
+        }
+    }
+    extend(Child.prototype,Parent.prototype);
+    let c1 = new Child('zhangsan',19,'man');
+    c1.showName();*/
+
+    //es6 使用class类的继承
+    class Parent{
+        constructor(name,age){
+            this.name = name;
+            this.age = age;
+        }
+        showName(){
+            console.log(this.name);
+        }
+    }
+    //方法的继承使用extends关键字，属性的继承使用super()方法
+    class Child extends Parent{
+        constructor(name,age,sex){
+            super(name,age);
+            this.sex = sex;
+        }
+        showName(){
+            console.log(this.name);
+        }
+    }
+    let c2 = new Child('lisi',21,'woman');
+    c2.showName()
+</script>
+</body>
+</html>

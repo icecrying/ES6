@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+/*    //1.属性的简写，当属性和方法相同时可以简写
+    let name = "zhangsan";
+    let age = 18;
+    let fn = {
+        name,
+        age
+    };
+
+    //2.方法的简写
+    let obj1 = {
+        showName:function () {
+            alert(1)
+        }
+    };
+    obj1.showName();
+    let obj2 = {
+        showName(){
+            alert(2)
+        }
+    };
+    obj2.showName();*/
+
+    //3.属性表达式
+    let a = 'name';
+    let b = 'age';
+    let obj3 = {
+        a:"xxxx",
+        b:20
+    };
+    let obj4 = {
+        [a]:"yyyy",
+        [b]:21
+    }
+    console.log(obj4)
+</script>
+</body>
+</html>

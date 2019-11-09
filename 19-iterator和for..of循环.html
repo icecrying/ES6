@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //1.什么是iterator?    iterator是一种接口，又叫做迭代器。他能依次处理数据结构的所有成员
+    //2.只要是一个数据结构具有了Symbol.iterator属性，那么就认为是可迭代的，有些数据结构原生就具备了Iterator接口，例如：Array、Map、Set、String等
+    let arr = [1,2,3,4];
+    console.log(arr[Symbol.iterator]()); //  Symbol.iterator就是一个函数,它里面next方法
+    console.log(arr[Symbol.iterator]().next());      //Object { value: 1, done: false }；注意，每调用一次，就会停止。
+    //仿写一个简单的iterator接口：
+    function Iterator(arr) {
+        let index = 0;
+        return {
+            next : () => {
+                if (index < arr.length) {
+                    return {value : arr[index++] ,done : false}
+                }else {
+                    return {value : undefined ,done : true}
+                }
+            }
+        }
+    }
+    let it = Iterator([1,2,3]);
+    console.log(it.next());     //Object { value: 1, done: false }
+    console.log(it.next());     //Object { value: 2, done: false }
+    console.log(it.next());     //Object { value: 3, done: false }
+    console.log(it.next());     //Object { value: undefined, done: true }
+
+
+    //3.for...of循环：for...of循环的对象必须是具有Symbol.iterator属性，例如：Array、Map、Set、String等
+    let obj = {
+        name: 'xiaoqiang',
+        age: 18
+    };
+    // console.log(obj[Symbol.iterator]());     //TypeError: obj[Symbol.iterator] is not a function
+    // 也就是说obj没有Symbol.iterator属性，不能用for...of循环。
+/*    这里会报错：obj is not iterable。obj不能迭代
+    for (let a of obj){
+        console.log(a)
+    }*/
+</script>
+</body>
+</html>

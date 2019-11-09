@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //1.匿名函数的自执行
+    (function () {
+        console.log(1)
+    })();
+    var module1 = (function () {
+        var _name = "zhangsan";
+        function fn1() {
+            alert(1)
+        }
+        function fn2() {
+            alert(_name)
+        }
+        return{
+            fn1: fn1,
+            fn2: fn2
+        }
+    })();
+    console.log(module1);
+    module1.fn1();
+</script>
+</body>
+</html>

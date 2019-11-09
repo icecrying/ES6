@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    <li>111</li>
+    <li>222</li>
+    <li>333</li>
+    <li>444</li>
+</ul>
+<script>
+    //for in 循环出来的i是一个伪数组，i包括li的下标0、1、2、3和节点item、数组的长度length
+/*
+    var aLi = document.getElementsByTagName('li');
+    for (var i in aLi) {
+        // console.log(i)
+        console.log(aLi.item(0).innerHTML)
+    }
+*/
+
+    //1.Array.from()将一个伪数组转化为数组
+    let aLi = document.getElementsByTagName('li');
+    for (let i in Array.from(aLi)) {
+        console.log(i)  //0、1、2、3只有下标
+    }
+
+    //2.Array.of()创建一个数组
+    let arr = Array.of(1,2,3,4)
+</script>
+</body>
+</html>

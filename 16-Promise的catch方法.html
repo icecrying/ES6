@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="btn">按钮</button>
+<p id="oResolve"></p>
+<p id="oReject" style="color: red"></p>
+<script>
+    let obtn = document.getElementById('btn');
+    let oResolve = document.getElementById('oResolve');
+    let oReject = document.getElementById('oReject');
+    //catch()方法：
+    //catch方法和then的第二个参数作用差不多,但是它还有一个功能就是如果在resolve中抛出错误，不会阻塞执行，而是可以在catch中捕获到错误
+    obtn.onclick = () => {
+        AsyncGetData().then((data) => {
+            //这里是成功需要执行的逻辑
+            oResolve.innerHTML = data;
+            xxx;    //这是一条错误信息
+        }).catch((data)=>{
+            //这里是失败需要执行的逻辑
+            oReject.innerHTML = data;
+        })
+    };
+    function AsyncGetData() {
+        let num = Math.floor(Math.random()*31+10);
+        let p =  new Promise((resolve,reject)=>{
+            //这里执行一些异步代码
+            setTimeout(()=>{
+                if (num >= 20) {
+                    console.log("成功");
+                    // 如果有数据传输，可以把数据放在resolve里面
+                    resolve("这里是成功后需要执行的数据")
+                }else {
+                    console.log("失败");
+                    reject("失败后的数据")
+                }
+            });
+        });
+        return p;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="btn">获取图片</button>
+
+<script>
+    const arr = [
+        'http://edu.nodeing.com/files/system/block_picture_1516366943.jpg?version=8.2.15',
+        'http://edu.nodeing.com/files/system/block_picture_1516369814.jpg?version=8.2.15',
+        'http://edu.nodeing.com/files/system/block_picture_1516977533.jpg?version=8.2.15',
+        'http://edu.nodeing.com/files/system/block_picture_1516973104.jpg?version=8.2.15'
+    ];
+
+    function AsyncLoadImg(url) {
+        let p = new Promise((resolve, reject) => {
+            let oImg = new Image();
+            oImg.src = url;
+            oImg.onload = () => {
+                resolve(oImg)
+            };
+            oImg.onerror = () => {
+                let error = new Error('图片加载失败');
+                reject(error)
+            }
+        });
+
+        return p;
+    }
+
+    //all()方法：通常适用于先加载资源，再执行操作的场景。
+    //all()方法注意事项：all方法中传入一个数组，里面是多个Promise实例，只有当所有的Promise实例的状态变为fulfilled的时候，整体的状态才会变成fulfilled。
+    //                   只要其中任意一个Promise实例不正确，那么整体都会不正确。
+    let oBtn = document.getElementById('btn');
+    oBtn.onclick = () => {
+
+        Promise.all([AsyncLoadImg(arr[0]),AsyncLoadImg(arr[1]),AsyncLoadImg(arr[2]),AsyncLoadImg(arr[3])])
+            .then((result) => {
+                console.log(result);
+                for(let i in result){
+                    document.body.appendChild(result[i]);
+                }
+            })
+    }
+
+</script>
+</body>
+</html>

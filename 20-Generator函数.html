@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //1.什么是Generator？   Generator函数是ES6提供的一种异步编程解决方案。在它的内部封装了多个状态，因此，又可以理解为一种状态机，
+    //                      执行Generator函数后返回一个迭代器对象，使用这个迭代器对象可以遍历出Generator函数内部的状态
+    //2.Generator函数的特点      1 函数定义的时候，function关键字后面加“*”， 2 内部使用yield关键字定义内部状态
+    //                           3 Generator函数被调用后，并不会立即执行完成，而是会在遇到yield关键字后暂停，返回的也不是函数的运行结果，而是一个执行内部状态的指针对象(Iterator对象)
+    function* HelloGenerator() {
+        yield "状态1";
+        yield "状态2";
+    }
+    let hg = HelloGenerator();
+/*    console.log(hg.next());  //{value: "状态1", done: false}
+    console.log(hg.next());  //{value: "状态2", done: false}
+    console.log(hg.next());  //{value: undefined, done: true}*/
+
+    //3.Generator函数的next方法是可以传入参数的,这个参数的值作为上一次状态的返回值.
+    function* Generator() {
+        let result = yield "状态1";
+        console.log(result);
+        yield "状态2";
+    }
+    let g = Generator();
+    console.log(g.next());       //Object { value: "状态1", done: false }
+    console.log(g.next('hello'));       //hello :这里的hello作为上一次状态yield "状态1"的返回值，赋值给了result，所以result打出来是hello
+                                        //Object { value: "状态2", done: false }
+
+    //4.Generator具有Symbol.Iterator属性，所以可以通过for...of遍历Generator内部状态。
+    for (let i of hg) {
+        console.log(i)      //状态1    状态2
+    }
+
+    //5.对象没有Symbol.Iterator属性，我们可以手动添加，让其具有Iterator接口
+    let obj = {};
+    function* gen() {
+        yield 1;
+        yield 2;
+        yield 3;
+        yield 4;
+    }
+    obj[Symbol.iterator] = gen;
+
+    for(let a of obj){
+        console.log(a);     //1 2 3 4
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="btn">获取图片</button>
+<script>
+    const arr = [
+        'http://edu.nodeing.com/files/system/block_picture_1516366943.jpg?version=8.2.15',
+        'http://edu.nodeing.com/files/system/block_picture_1516369814.jpg?version=8.2.15',
+        'http://edu.nodeing.com/files/system/block_picture_1516977533.jpg?version=8.2.15',
+        'http://edu.nodeing.com/files/system/block_picture_1516973104.jpg?version=8.2.15'
+    ];
+    let obtn = document.getElementById('btn');
+    obtn.onclick = () => {
+        AsyncLoadImg(arr[0]).then((data)=>{
+            //加载成功后需要执行的逻辑
+            data.title = "图片1";
+            document.body.appendChild(data);
+            return AsyncLoadImg(arr[1])
+        }).then((data) => {
+            data.title = "图片2";
+            document.body.appendChild(data);
+            return AsyncLoadImg(arr[2])
+        }).then((data) => {
+            data.title = "图片3";
+            document.body.appendChild(data);
+            return AsyncLoadImg(arr[3])
+        }).then((data) => {
+            data.title = "图片4";
+            document.body.appendChild(data);
+        })
+    };
+    function AsyncLoadImg(url) {
+        return new Promise((resolve, reject) => {
+            //创建一个图片对象
+            let oImg = new Image();     //图片有两种状态，一种是加载成功onload,一种是加载失败onerror
+            oImg.src = url;
+            oImg.onload = () =>{
+                resolve(oImg);
+            };
+            oImg.onerror = () => {
+                //自己定义一个图片加载失败后需要传递的数据
+                let error = new Error('加载失败');
+                reject(error);
+            }
+        })
+    }
+
+</script>
+</body>
+</html>

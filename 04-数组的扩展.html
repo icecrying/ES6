@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //1.copyWithin()将数组内部指定位置的元素复制到目标位置并且覆盖原先的元素
+    let arr1 = [1,2,3,4,5,6];
+    arr1.copyWithin(0,3,5); //将下标第3个位置的元素到下标第5个位置之前的元素，复制到下标第0个的位置，如果有多个元素，从目标位置依次覆盖
+    console.log(arr1);   //[4、5、3、4、5、6]
+
+    //2.fill()用于填充数组（一般用于初始化数组）
+    let arr2 = [1,2,3,4,5,6];
+    arr2.fill( 'hello',3,5);  //将下标第3个位置的元素到下标第5个位置之前的元素替换为'hello'
+    console.log(arr2);
+
+    //3.entries,keys,values 配合for…of循环
+    let arr3 = [1,2,3,4,5,6];
+        //a.keys()打印出下标
+    for (let i of arr3.keys()) {
+        console.log(i)
+    }
+        //b.遍历值
+    for (let i of arr3.values()) {
+        console.log(i)
+    }
+        //c.遍历下标和值（键值对）：把下标和对应的值组成一个数组
+    for (let i of arr3.entries()) {
+        console.log(i)
+    }
+
+    //4.find()和findIndex()
+    let arr4 = [1,2,3,4,5,6];
+        //find()查找元素并且返回第一个符合条件的元素
+    let v = arr4.find(function (v,i,a) {
+        //v表示值，i表示下标，a表示数组
+        console.log(v,i,a);
+        return i>3
+    });
+    //find()返回的只有一个元素，上面的条件时返回比3打的下标，那就是4，第4个下标对应的是5，所以返回5
+    console.log(v);  //5
+
+        //findIndex()查找元素并且返回第一个符合条件的下标
+    let i = arr4.findIndex(function (v,i,a) {
+        return i>3
+    });
+    //findIndex()返回的只有一个下标，上面的条件时返回比3打的下标，那就是4
+    console.log(i);      //4
+
+    //5.includes 检查元素是否在数组里面
+    let arr5 = [1,2,3,4,5,6];
+    console.log(arr5.includes(3))   //true
+</script>
+</body>
+</html>

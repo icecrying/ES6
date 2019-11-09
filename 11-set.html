@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //1.Set() 是一种类数据结构，类似于数组，特点是元素不重复
+    let st = new Set([1,2,2,3,3,3,4,4,4,4]);
+    console.log(st);     //Set(4) [ 1, 2, 3, 4 ]   相当于自动去重
+
+    //Set()相关方法：
+    //1.增加元素 add（);                 2.删除元素delete();             3.判断是否有某个元素存在has();
+    //4.清除所有元素clear();             5.返回键名的遍历器keys();       6.返回值的遍历器values()
+    //7.返回键值对的遍历器entries();     8.返回回调函数遍历元素forEach();
+    st.add(5);
+    console.log(st);    //Set(5) [ 1, 2, 3, 4, 5 ]
+    st.delete(3);
+    console.log(st);    //Set(4) [ 1, 2, 4, 5 ]
+    console.log(st.has(3));        //false
+    st.clear();
+    console.log(st);        //Set []
+
+    //循环
+    let st2 = new Set([1,2,3,4]);
+    for (let attr of st2.keys()) {
+        console.log(attr)       //1、2、3、4
+    }
+    for (let attr of st2.values()) {
+        console.log(attr)       //1、2、3、4
+    }
+    for (let attr of st2.entries()) {
+        console.log(attr)       //Array [ 1, 1 ]、Array [ 2, 2 ]、Array [ 3, 3 ]、Array [ 4, 4 ]
+    }
+    st2.forEach((v,k,s)=>{
+        console.log(s,k,s)
+    })
+</script>
+</body>
+</html>

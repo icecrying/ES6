@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //js的数据类型：基本数据类型  num string bool undefined null Symbol
+    //              引用数据类型  Object
+
+    //Symbol：表示独一无二的值
+
+/*    //问题：
+    var obj = {
+        name: "xiaoqiang",
+        showName: function(){alert(1)}
+    };
+    obj.name = "nodeing";
+    obj.showName = function(){alert(2)};
+
+    //此时后面定义的会将前面定义的覆盖掉！
+    //取obj的值：
+    console.log(obj.name);      //nodeing
+    //调用obj的方法
+    obj.showName();     //alert(2)*/
+
+    //Symbol()方法：
+    let name = Symbol();
+    let showName = Symbol();
+    //虽然name和showName都是Symbol()，但是两者不相等；为了方便区分，可以在括号里加值。
+    console.log(name==showName);    //false
+
+
+    let obj = {
+        [name]:"zhangsan",
+        [showName](){
+            alert(3)
+        }
+    };
+    console.log(obj)
+    //取值
+    console.log(obj[name]);
+    //调用方法
+    obj[showName]()
+
+</script>
+</body>
+</html>
